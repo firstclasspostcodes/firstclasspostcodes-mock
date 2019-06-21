@@ -2,6 +2,10 @@
 
 A HTTP mock server that responds like the real Firstclasspostcodes API. It is intended for use by clients integrating with our API, in order to improve integration testing and to ensure tests are less brittle.
 
+To get started using the API, [read the docs](https://docs.firstclasspostcodes.com).
+
+We also provide clients in [Ruby](https://github.com/firstclasspostcodes/firstclasspostcodes-ruby), [Java](https://github.com/firstclasspostcodes/firstclasspostcodes-java), [Javascript/NodeJS](https://github.com/firstclasspostcodes/firstclasspostcodes-js), [Python](https://github.com/firstclasspostcodes/firstclasspostcodes-python) and libraries for [React](https://github.com/firstclasspostcodes/react-postcode-lookup), [Vue](https://github.com/firstclasspostcodes/vue-postcode-lookup), [Angular](https://github.com/firstclasspostcodes/angular-postcode-lookup) and [Web Components](https://github.com/firstclasspostcodes/web-components-postcode-lookup).
+
 ## Usage
 
 A docker container is provided for ease of use:
