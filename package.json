@@ -4,7 +4,10 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node -r dotenv/config src/index.js"
+    "commit": "npx git-cz",
+    "semantic-release": "semantic-release",
+    "start": "node -r dotenv/config src/index.js",
+    "test": "echo \"No tests yet.\""
   },
   "repository": {
     "type": "git",
@@ -23,5 +26,20 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-openapi": "^4.6.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-angular": "^8.0.0",
+    "@semantic-release/commit-analyzer": "^6.2.0",
+    "@semantic-release/git": "^7.0.12",
+    "eslint": "^6.0.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "git-cz": "^3.0.1",
+    "husky": "^2.4.1",
+    "jest": "^24.8.0",
+    "jest-runner-eslint": "^0.7.4",
+    "semantic-release": "^15.13.16",
+    "semantic-release-docker": "^2.2.0"
   }
 }
