@@ -1,6 +1,6 @@
 # 🔀 API Mock
 
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Build Status](https://travis-ci.org/firstclasspostcodes/firstclasspostcodes-mock.svg?branch=master)](https://travis-ci.org/firstclasspostcodes/firstclasspostcodes-mock) [![](https://images.microbadger.com/badges/image/firstclasspostcodes/mock.svg)](https://microbadger.com/images/firstclasspostcodes/mock "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/firstclasspostcodes/mock.svg)](https://microbadger.com/images/firstclasspostcodes/mock "Get your own version badge on microbadger.com")
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Build Status](https://travis-ci.org/firstclasspostcodes/firstclasspostcodes-mock.svg?branch=master)](https://travis-ci.org/firstclasspostcodes/firstclasspostcodes-mock) [![](https://images.microbadger.com/badges/image/firstclasspostcodes/mock.svg)](https://microbadger.com/images/firstclasspostcodes/mock "Docker Image") [![](https://images.microbadger.com/badges/version/firstclasspostcodes/mock.svg)](https://microbadger.com/images/firstclasspostcodes/mock "Docker Version")
 
 A HTTP mock server that responds like the real Firstclasspostcodes API. It is intended for use by clients integrating with our API, in order to improve integration testing and to ensure tests are less brittle.
 
@@ -19,7 +19,7 @@ docker run -p 80:2345 firstclasspostcodes/mock
 Now start calling the Firstclasspostcodes API:
 
 ```
-curl -H 'X-Api-Key:111111111111' http://localhost:2345/postcode?search=AR517FG
+curl -H 'X-Api-Key:111111111111' http://localhost:2345/postcode?search=AR514UI
 ```
 
 ### API Key
@@ -28,21 +28,11 @@ The API Key is **always** `111111111111`. If an API Key is not provided, `403` r
 
 ## Data
 
-A fake set of data is provided with postcodes all beginning with `AR51` (Area 51 👽). The provided set of inward postcodes are below. 
+A small set of test data is available for querying through the mock API. See [test data](/DATA.md) for the complete list. 
 
-> Note: Additional inward codes will be added in **major releases**.
+Whilst the test data is sourced from our live API, it may not be in sync with updates.
 
-| Inward Code | Latitude | Longitude |
-|-------------|:--------:|:---------:|
-| `1SD` | `48.97567` | `-15.34236` |
-| `2BN` | `48.97206` | `-14.64586` |
-| `3VB` | `48.97415` | `-13.94988` |
-| `4UI` | `49.0009` | `-13.333` |
-| `5NM` | `48.98497` | `-12.61779` |
-| `6SA` | `48.98545` | `-11.21787` |
-| `7DD` | `49.38859` | `-13.94823` |
-| `8LX` | `49.8406` | `-13.9471` |
-| `9OP` | `48.51565` | `-13.95922` |
+> Note: Additional postcodes will be added in **major releases**.
 
 ## Local Development
 
