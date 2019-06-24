@@ -23,19 +23,6 @@ openapi.initialize({
     Authorizer: authorizer,
   },
   operations: {
-
-    getLookup: (req, res) => {
-      return res.status(200).json({
-        hello: 'world',
-      });
-    },
-
-    getTypeahead: (req, res) => {
-      return res.status(200).json({
-        hello: 'world',
-      });
-    },
-
     getSpecification: (req, res) => res.status(204),
   },
 });
