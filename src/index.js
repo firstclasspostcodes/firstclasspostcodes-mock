@@ -27,8 +27,6 @@ openapi.initialize({
   },
 });
 
-app.use((err, req, res) => res.status(err.status).json(err));
-
 module.exports = app;
 
 app.listen(PORT, () => {
