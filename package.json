@@ -46,7 +46,7 @@
     "husky": "^2.4.1",
     "jest": "^24.8.0",
     "jest-runner-eslint": "^0.7.4",
-    "semantic-release": "^15.13.16",
+    "semantic-release": "^15.13.18",
     "semantic-release-docker": "^2.2.0"
   }
 }
