@@ -42,7 +42,7 @@
     "eslint": "^6.0.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.3",
-    "git-cz": "^3.0.1",
+    "git-cz": "^3.2.1",
     "husky": "^2.4.1",
     "jest": "^24.8.0",
     "jest-runner-eslint": "^0.7.4",
