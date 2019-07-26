@@ -5,7 +5,8 @@
     "jest": true
   },
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "no-throw-literal": "off"
   },
   "settings": {
     "import/core-modules": [

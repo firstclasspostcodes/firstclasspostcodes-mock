@@ -18,7 +18,7 @@ openapi.initialize({
   apiDoc: fs.readFileSync(path.resolve(process.cwd(), SPEC_FILE), 'utf8'),
   promiseMode: true,
   paths: path.resolve(__dirname, 'routes'),
-  app: app,
+  app,
   securityHandlers: {
     Authorizer: authorizer,
   },
@@ -30,5 +30,5 @@ openapi.initialize({
 module.exports = app;
 
 app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`)
+  console.log(`Listening on ${PORT}`);
 });

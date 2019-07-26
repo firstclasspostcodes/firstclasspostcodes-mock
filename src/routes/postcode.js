@@ -1,6 +1,6 @@
 const data = require('../data');
 
-const toId = (str) => Buffer.from(str.replace(/ /g, '').toLowerCase()).toString('base64');
+const toId = str => Buffer.from(str.replace(/ /g, '').toLowerCase()).toString('base64');
 
 const prepareJSON = ({ numbers = [], ...obj }) => ({
   street: obj.street,
@@ -21,7 +21,7 @@ const prepareJSON = ({ numbers = [], ...obj }) => ({
 const get = async (req, res) => {
   const id = toId(req.query.search);
   const prepared = await data;
-  const [match] = prepared.filter((obj) => toId(obj.postcode) === id);
+  const [match] = prepared.filter(obj => toId(obj.postcode) === id);
   if (!match) {
     return res.status(204).json({});
   }

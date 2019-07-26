@@ -1,13 +1,13 @@
+const geolib = require('geolib');
 const data = require('../data');
 
-const geolib = require('geolib');
 
 const filterByDistance = (position, meters) => ({ latitude, longitude }) => {
   const distance = geolib.getDistance(position, { latitude, longitude });
   return distance <= meters;
 };
 
-const prepareJSON = (obj) => ({
+const prepareJSON = obj => ({
   postcode: obj.postcode,
   position: {
     latitude: obj.latitude,

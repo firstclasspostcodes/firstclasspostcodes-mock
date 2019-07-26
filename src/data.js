@@ -14,14 +14,14 @@ const csvOpts = {
 };
 
 const globOpts = {
-  cwd: DATA_PATH, 
+  cwd: DATA_PATH,
   absolute: true,
 };
 
-const parseCSV = async (filepath) => parsePromise(await fs.readFile(filepath, 'utf8'), csvOpts);
+const parseCSV = async filepath => parsePromise(await fs.readFile(filepath, 'utf8'), csvOpts);
 
 module.exports = (async () => {
-  const files = await globPromise(`**/*.csv`, globOpts);
+  const files = await globPromise('**/*.csv', globOpts);
   const listOfCsv = await Promise.all(files.map(parseCSV));
   return [].concat(...listOfCsv);
 })();
