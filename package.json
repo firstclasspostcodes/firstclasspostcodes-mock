@@ -30,7 +30,7 @@
     "express-openapi": "^4.6.5",
     "fs-extra": "^8.1.0",
     "geolib": "^3.0.4",
-    "glob": "^7.1.4",
+    "glob": "^7.1.5",
     "lunr": "^2.3.7"
   },
   "devDependencies": {
