@@ -9,7 +9,7 @@ const filterByDistance = (position, meters) => ({ latitude, longitude }) => {
   return distance <= meters;
 };
 
-const prepareJSON = obj => ({
+const prepareJSON = (obj) => ({
   postcode: obj.postcode,
   position: {
     latitude: parseFloat(obj.latitude),
@@ -17,7 +17,7 @@ const prepareJSON = obj => ({
   },
 });
 
-const prepareGeoJSON = matches => ({
+const prepareGeoJSON = (matches) => ({
   type: 'FeatureCollection',
   features: matches.map(({ postcode, latitude, longitude }) => ({
     type: 'Feature',

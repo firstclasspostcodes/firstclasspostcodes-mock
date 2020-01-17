@@ -8,7 +8,7 @@ const globOpts = {
   absolute: true,
 };
 
-const readAndParseJSON = filepath => JSON.parse(readFileSync(filepath, 'utf8'));
+const readAndParseJSON = (filepath) => JSON.parse(readFileSync(filepath, 'utf8'));
 
 const files = glob.sync('**/*.json', globOpts);
 

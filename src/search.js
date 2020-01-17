@@ -12,11 +12,11 @@ const prepareDocs = ({ postcode, streets }) => (
   })
 );
 
-const prepareIndex = docs => lunr(function run() {
+const prepareIndex = (docs) => lunr(function run() {
   const index = this;
   index.field('display');
   index.ref('id');
-  docs.forEach(doc => index.add(doc));
+  docs.forEach((doc) => index.add(doc));
 });
 
 const prepared = [].concat(...data.map(prepareDocs));

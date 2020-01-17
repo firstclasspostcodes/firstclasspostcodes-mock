@@ -3,9 +3,9 @@ const data = require('../data');
 
 const TYPES = ['application/json', 'application/geo+json'];
 
-const toId = str => Buffer.from(str.replace(/ /g, '').toLowerCase()).toString('base64');
+const toId = (str) => Buffer.from(str.replace(/ /g, '').toLowerCase()).toString('base64');
 
-const prepareJSON = obj => ({
+const prepareJSON = (obj) => ({
   streets: obj.streets,
   numbers: obj.numbers,
   postcode: obj.postcode,
@@ -29,7 +29,7 @@ const prepareJSON = obj => ({
   },
 });
 
-const prepareGeoJSON = obj => ({
+const prepareGeoJSON = (obj) => ({
   type: 'FeatureCollection',
   features: [
     ...obj.numbers.map(({ number, building, street }) => ({
