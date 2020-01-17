@@ -1,0 +1,76 @@
+{
+  "id": "YWIzMDFmcg==",
+  "postcode": "AB30 1FR",
+  "easting": "364983",
+  "northing": "0773826",
+  "latitude": "56.854537",
+  "longitude": "-2.575801",
+  "geokey": "5226008",
+  "georange": "5226008276070769367",
+  "sector": "AB30 1",
+  "district": "AB30",
+  "area": "AB",
+  "inward": "1FR",
+  "constituency": "West Aberdeenshire and Kincardine",
+  "country": "Scotland",
+  "ward": "Mearns",
+  "city": "",
+  "locality": "",
+  "county": "Aberdeenshire",
+  "region": "Scotland",
+  "streets": [
+    "Gladstone Gardens"
+  ],
+  "numbers": [
+    {
+      "number": "1",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "2",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "3",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "4",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "5",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "6",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "7",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "8",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "9",
+      "building": "",
+      "street": "Gladstone Gardens"
+    },
+    {
+      "number": "10",
+      "building": "",
+      "street": "Gladstone Gardens"
+    }
+  ]
+}

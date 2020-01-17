@@ -2,46 +2,23 @@ const lunr = require('lunr');
 
 const data = require('./data');
 
-const prepareDocs = ({
-  postcode, numbers, street, city, county,
-}) => {
-  if (typeof numbers !== 'string') {
-    return [];
-  }
-
-  const arr = numbers.split(',');
-
-  if (arr.length === 0) {
-    return [];
-  }
-
-  const docs = arr.map((number) => {
-    const display = [number, street, city, county, postcode].filter(Boolean).join(', ');
-    const id = JSON.stringify({ display, postcode, number });
+const prepareDocs = ({ postcode, streets }) => (
+  streets.map((street) => {
+    const display = [street, postcode].filter(Boolean).join(', ');
+    const id = JSON.stringify({ street, postcode });
     return {
-      id, display, postcode, number,
+      id, display, postcode, street,
     };
-  });
+  })
+);
 
-  return docs;
-};
-
-const prepareIndex = docs => new Promise((resolve, reject) => {
-  const idx = lunr(function run() {
-    const index = this;
-    try {
-      index.field('display');
-      index.ref('id');
-      docs.forEach(doc => index.add(doc));
-    } catch (err) {
-      reject(err);
-    }
-  });
-  resolve(idx);
+const prepareIndex = docs => lunr(function run() {
+  const index = this;
+  index.field('display');
+  index.ref('id');
+  docs.forEach(doc => index.add(doc));
 });
 
-module.exports = (
-  () => data
-    .then(prepared => [].concat(...prepared.map(prepareDocs)))
-    .then(prepareIndex)
-)();
+const prepared = [].concat(...data.map(prepareDocs));
+
+module.exports = prepareIndex(prepared);
