@@ -29,7 +29,7 @@ The API Key is **always** `111111111111`. If an API Key is not provided, `403` r
 
 ## Data
 
-A small set of test data is available for querying through the mock API. See [test data](/DATA.md) for the complete list. 
+A small set of test data is available for querying through the mock API. A special endpoint is provided `GET: /data/.postcodes` which will list all postcodes currently provided for testing purposes.
 
 Whilst the test data is sourced from our live API, it may not be in sync with updates.
 

@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:12.13.0-alpine
 
 ARG spec_url=https://api.firstclasspostcodes.com/data/.spec
 
