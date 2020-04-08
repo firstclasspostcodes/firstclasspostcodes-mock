@@ -1,24 +1,15 @@
-const lunr = require('lunr');
+const JsSearch = require('js-search');
 
 const data = require('./data');
 
-const prepareDocs = ({ postcode, streets }) => (
-  streets.map((street) => {
-    const display = [street, postcode].filter(Boolean).join(', ');
-    const id = JSON.stringify({ street, postcode });
-    return {
-      id, display, postcode, street,
-    };
-  })
-);
+const search = new JsSearch.Search('id');
 
-const prepareIndex = (docs) => lunr(function run() {
-  const index = this;
-  index.field('display');
-  index.ref('id');
-  docs.forEach((doc) => index.add(doc));
-});
+search.indexStrategy = new JsSearch.PrefixIndexStrategy();
 
-const prepared = [].concat(...data.map(prepareDocs));
+search.addIndex('streets');
 
-module.exports = prepareIndex(prepared);
+search.addIndex('postcode');
+
+search.addDocuments(data);
+
+module.exports = (term) => search.search(term);
