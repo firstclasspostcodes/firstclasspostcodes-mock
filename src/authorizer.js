@@ -1,18 +1,12 @@
-const authorizer = (req, scopes, definition) => {
-  const value = req.get(definition.name);
-  if (!value) {
-    throw {
-      status: 403,
-      message: `Missing "${definition.name}" in ${definition.in}.`,
-    };
+const authorizer = (req, res, done) => {
+  const { 'x-api-key': key } = req.headers;
+  if (!key) {
+    return res.code(403).send('Missing X-Api-Key header in request');
   }
-  if (value !== '111111111111') {
-    throw {
-      status: 403,
-      message: `Invalid API Key "${value}"`,
-    };
+  if (key !== '111111111111') {
+    return res.code(403).send(`Invalid API Key "${key}" should be "111111111111"`);
   }
-  return Promise.resolve(true);
+  return done();
 };
 
 module.exports = authorizer;

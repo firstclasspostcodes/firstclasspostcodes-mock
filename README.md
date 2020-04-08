@@ -1,20 +1,19 @@
-![Cover](/.github/images/cover.png)
 # 🔀 API Mock
 
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Build Status](https://travis-ci.org/firstclasspostcodes/firstclasspostcodes-mock.svg?branch=master)](https://travis-ci.org/firstclasspostcodes/firstclasspostcodes-mock) [![](https://images.microbadger.com/badges/image/firstclasspostcodes/mock.svg)](https://microbadger.com/images/firstclasspostcodes/mock "Docker Image") [![](https://images.microbadger.com/badges/version/firstclasspostcodes/mock.svg)](https://microbadger.com/images/firstclasspostcodes/mock "Docker Version")
+![Build, test and release](https://github.com/firstclasspostcodes/firstclasspostcodes-mock/workflows/Build,%20test%20and%20release/badge.svg)
 
 A HTTP mock server that responds like the real Firstclasspostcodes API. It is intended for use by clients integrating with our API, in order to improve integration testing and to ensure tests are less brittle.
 
 To get started using the API, [read the docs](https://docs.firstclasspostcodes.com).
 
-We also provide clients in [Ruby](https://github.com/firstclasspostcodes/firstclasspostcodes-ruby), [Java](https://github.com/firstclasspostcodes/firstclasspostcodes-java), [Javascript/NodeJS](https://github.com/firstclasspostcodes/firstclasspostcodes-js), [Python](https://github.com/firstclasspostcodes/firstclasspostcodes-python) and libraries for [React](https://github.com/firstclasspostcodes/react-postcode-lookup), [Vue](https://github.com/firstclasspostcodes/vue-postcode-lookup), [Angular](https://github.com/firstclasspostcodes/angular-postcode-lookup) and [Web Components](https://github.com/firstclasspostcodes/web-components-postcode-lookup).
+We provide clients in [Ruby](https://github.com/firstclasspostcodes/firstclasspostcodes-ruby), [PHP](https://github.com/firstclasspostcodes/firstclasspostcodes-php), [Javascript/NodeJS](https://github.com/firstclasspostcodes/firstclasspostcodes-js), [Python](https://github.com/firstclasspostcodes/firstclasspostcodes-python). To configure the client libraries to connect to this mock API, view the relevant library documentation.
 
 ## Usage
 
 A docker container is provided for ease of use:
 
 ```sh
-docker run -p 80:2345 firstclasspostcodes/mock
+docker run -p 80:2345 firstclasspostcodes/mock:v0.0.0
 ```
 
 Now start calling the Firstclasspostcodes API:

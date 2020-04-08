@@ -2,7 +2,35 @@
   "branch": "master",
   "plugins": [
     "@semantic-release/commit-analyzer",
-    "@semantic-release/git",
+    "@semantic-release/release-notes-generator",
+    [
+      "@google/semantic-release-replace-plugin",
+      {
+        "replacements": [
+          {
+            "files": ["README.md"],
+            "from": "mock:v[\\.0-9]+",
+            "to": "mock:${nextRelease.gitTag}.",
+            "results": [
+              {
+                "file": "README.md",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["README.md"],
+        "message": "chore: Updated README.md version ${nextRelease.version} [skip ci]"
+      }
+    ],
     "semantic-release-docker"
   ],
   "publish": [

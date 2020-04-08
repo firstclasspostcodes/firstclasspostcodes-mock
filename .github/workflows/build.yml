@@ -1,0 +1,30 @@
+name: "Build, test and release"
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+      - run: docker build -t $DOCKER_IMAGE .
+        env:
+          DOCKER_IMAGE: ${{secrets.DOCKER_IMAGE}}
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          branch: master
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          

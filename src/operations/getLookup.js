@@ -1,12 +1,13 @@
 const accepts = require('accepts');
-const geolib = require('geolib');
+const distance = require('@turf/distance').default;
+
 const data = require('../data');
 
 const TYPES = ['application/json', 'application/geo+json'];
 
-const filterByDistance = (position, meters) => ({ latitude, longitude }) => {
-  const distance = geolib.getDistance(position, { latitude, longitude });
-  return distance <= meters;
+const filterByDistance = (from, kilometers) => ({ latitude, longitude }) => {
+  const to = [longitude, latitude];
+  return distance(from, to, { unit: 'kilometers' }) <= kilometers;
 };
 
 const prepareJSON = (obj) => ({
@@ -35,25 +36,24 @@ const prepareGeoJSON = (matches) => ({
   })),
 });
 
-const get = async (req, res) => {
-  const { latitude, longitude, radius: km } = req.query;
-  const matches = data.filter(filterByDistance({ latitude, longitude }, km * 100));
-  if (matches.length === 0) {
-    return res.status(204).json([]);
-  }
-  res.status(200);
+const get = async (request, reply) => {
+  const { latitude, longitude, radius: km } = request.query;
 
-  switch (accepts(req).type(TYPES)) {
+  const matches = data.filter(filterByDistance([longitude, latitude], km));
+
+  if (matches.length === 0) {
+    return reply.code(204).send();
+  }
+
+  reply.status(200);
+
+  switch (accepts(request).type(TYPES)) {
     case 'application/geo+json':
-      res.setHeader('Content-Type', 'application/geo+json');
-      return res.json(prepareGeoJSON(matches));
+      return reply.type('application/geo+json').send(JSON.stringify(prepareGeoJSON(matches)));
     default:
     case 'application/json':
-      res.setHeader('Content-Type', 'application/json');
-      return res.json(matches.map(prepareJSON));
+      return reply.type('application/json').send(JSON.stringify(matches.map(prepareJSON)));
   }
 };
 
-module.exports = {
-  get,
-};
+module.exports = get;

@@ -1,39 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const openapi = require('express-openapi');
-const path = require('path');
-const cors = require('cors');
+const fastify = require('fastify');
+const cors = require('fastify-cors');
+const glue = require('fastify-openapi-glue');
 
-const data = require('./data');
+const { PORT } = process.env;
+
+const openapi = require('./openapi');
 const authorizer = require('./authorizer');
 
-const { PORT, SPEC_FILE } = process.env;
-
-const app = express();
-
-app.use(cors());
-app.use(bodyParser.json());
-
-app.get('/data/.postcodes', (req, res) => {
-  res.json(data.map(({ postcode, latitude, longitude }) => ({ postcode, latitude, longitude })));
+const server = fastify({
+  logger: true,
 });
 
-openapi.initialize({
-  apiDoc: fs.readFileSync(path.resolve(process.cwd(), SPEC_FILE), 'utf8'),
-  promiseMode: true,
-  paths: path.resolve(__dirname, 'routes'),
-  app,
-  securityHandlers: {
-    Authorizer: authorizer,
-  },
-  operations: {
-    getSpecification: (req, res) => res.status(204),
-  },
-});
+server.addHook('onRequest', authorizer);
 
-module.exports = app;
+server.register(cors);
 
-app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
+server.register(glue, openapi);
+
+const start = async () => {
+  try {
+    await server.listen(PORT);
+    server.log.info(`server listening on ${server.server.address().port}`);
+  } catch (err) {
+    server.log.error(err);
+    process.exit(1);
+  }
+};
+
+start();

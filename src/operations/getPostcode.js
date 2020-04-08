@@ -66,25 +66,24 @@ const prepareGeoJSON = (obj) => ({
   ],
 });
 
-const get = (req, res) => {
-  const searchId = toId(req.query.search);
-  const match = data.find(({ id }) => id === searchId);
-  if (!match) {
-    return res.status(204).json({});
-  }
-  res.status(200);
+const get = (request, reply) => {
+  const searchId = toId(request.query.search);
 
-  switch (accepts(req).type(TYPES)) {
+  const match = data.find(({ id }) => id === searchId);
+
+  if (!match) {
+    return reply.code(204).send();
+  }
+
+  reply.code(200);
+
+  switch (accepts(request).type(TYPES)) {
     case 'application/geo+json':
-      res.setHeader('Content-Type', 'application/geo+json');
-      return res.json(prepareGeoJSON(match));
+      return reply.type('application/geo+json').send(JSON.stringify(prepareGeoJSON(match)));
     default:
     case 'application/json':
-      res.setHeader('Content-Type', 'application/json');
-      return res.json(prepareJSON(match));
+      return reply.type('application/json').send(JSON.stringify(prepareJSON(match)));
   }
 };
 
-module.exports = {
-  get,
-};
+module.exports = get;
