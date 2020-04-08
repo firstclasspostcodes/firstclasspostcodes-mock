@@ -36,8 +36,8 @@ const prepareGeoJSON = (matches) => ({
   })),
 });
 
-const get = async (request, reply) => {
-  const { latitude, longitude, radius: km } = request.query;
+const get = (request, reply) => {
+  const { latitude, longitude, radius: km = 5 } = request.query;
 
   const matches = data.filter(filterByDistance([longitude, latitude], km));
 
@@ -45,7 +45,7 @@ const get = async (request, reply) => {
     return reply.code(204).send();
   }
 
-  reply.status(200);
+  reply.code(200);
 
   switch (accepts(request).type(TYPES)) {
     case 'application/geo+json':
