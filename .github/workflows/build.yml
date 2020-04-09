@@ -18,10 +18,13 @@ jobs:
       - run: npm test
         env:
           SPEC_FILE: spec.json
-      - run: docker build -t $DOCKER_IMAGE .
+      - name: Docker Build
+        run: docker build -t $DOCKER_IMAGE .
+        if: github.ref == 'refs/heads/master'
         env:
           DOCKER_IMAGE: ${{secrets.DOCKER_IMAGE}}
       - name: Semantic Release
+        if: github.ref == 'refs/heads/master'
         id: semantic
         uses: cycjimmy/semantic-release-action@v2
         with:
