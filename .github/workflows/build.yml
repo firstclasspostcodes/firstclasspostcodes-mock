@@ -14,11 +14,17 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
+      - run: curl -o spec.json https://api.firstclasspostcodes.com/data/.spec
       - run: npm test
-      - run: docker build -t $DOCKER_IMAGE .
+        env:
+          SPEC_FILE: spec.json
+      - name: Docker Build
+        run: docker build -t $DOCKER_IMAGE .
+        if: github.ref == 'refs/heads/master'
         env:
           DOCKER_IMAGE: ${{secrets.DOCKER_IMAGE}}
       - name: Semantic Release
+        if: github.ref == 'refs/heads/master'
         id: semantic
         uses: cycjimmy/semantic-release-action@v2
         with:

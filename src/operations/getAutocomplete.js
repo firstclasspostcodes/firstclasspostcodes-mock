@@ -1,41 +1,15 @@
 const search = require('../search');
 
 const prepareJSON = (query, results = []) => {
-  const prepared = {
-    roads: [],
-    postcodes: [],
-  };
-
   if (query.length < 2) {
-    return prepared;
+    return [];
   }
 
   if (query.length < 4) {
-    prepared.postcodes = results.map(((r) => r.sector));
-    return prepared;
+    return results.map(((r) => r.postcode));
   }
 
-  prepared.postcodes = results.map(((r) => r.postcode));
-
-  results.forEach((result) => {
-    result.streets.forEach((street) => {
-      if (new RegExp(query, 'i').test(street) !== true) {
-        return false;
-      }
-
-      const record = prepared.roads.find(([name]) => new RegExp(street, 'i').test(name));
-
-      if (!record) {
-        return prepared.roads.push([street, [result.postcode]]);
-      }
-
-      const [, postcodes] = record;
-
-      return postcodes.push(result.postcode);
-    });
-  });
-
-  return prepared;
+  return results.map(({ postcode, streets }) => [postcode, streets]);
 };
 
 const get = (req, reply) => {

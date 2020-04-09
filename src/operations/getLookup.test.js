@@ -7,11 +7,21 @@ const getRandomData = () => data[Math.floor(Math.random() * data.length)];
 const setupMockReply = () => {
   const reply = {
     code: jest.fn().mockImplementation(() => reply),
-    send: jest.fn().mockImplementation(() => reply),
     type: jest.fn().mockImplementation(() => reply),
+    send: jest.fn().mockImplementation((response) => {
+      try {
+        reply.responseBody = JSON.parse(response);
+      } catch (e) {
+        reply.responseBody = response;
+      }
+      return reply;
+    }),
   };
+
   return reply;
 };
+
+const responseSchema = { $ref: 'api#/definitions/Points' };
 
 describe('#getLookup', () => {
   let fixture;
@@ -41,6 +51,7 @@ describe('#getLookup', () => {
       expect(reply.code).toHaveBeenCalledWith(200);
       expect(reply.type).toHaveBeenCalledWith('application/json');
       expect(reply.send).toHaveBeenCalledWith(expect.stringContaining(fixture.postcode));
+      expect(reply.responseBody).toMatchSchema(responseSchema);
     });
 
     describe('when geoJSON data is requested', () => {

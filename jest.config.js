@@ -7,6 +7,9 @@ module.exports = {
       roots: [
         '<rootDir>/src',
       ],
+      setupFilesAfterEnv: [
+        './jest.setup.js',
+      ],
       testRegex: '((\\.|/)(test|spec))\\.jsx?$',
       collectCoverage: true,
       coverageThreshold: {
