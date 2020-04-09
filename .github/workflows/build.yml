@@ -14,7 +14,10 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
+      - run: curl -o spec.json https://api.firstclasspostcodes.com/data/.spec
       - run: npm test
+        env:
+          SPEC_FILE: spec.json
       - run: docker build -t $DOCKER_IMAGE .
         env:
           DOCKER_IMAGE: ${{secrets.DOCKER_IMAGE}}
