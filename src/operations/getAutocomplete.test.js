@@ -7,11 +7,21 @@ const getRandomData = () => data[Math.floor(Math.random() * data.length)];
 const setupMockReply = () => {
   const reply = {
     code: jest.fn().mockImplementation(() => reply),
-    send: jest.fn().mockImplementation(() => reply),
     type: jest.fn().mockImplementation(() => reply),
+    send: jest.fn().mockImplementation((response) => {
+      try {
+        reply.responseBody = JSON.parse(response);
+      } catch (e) {
+        reply.responseBody = response;
+      }
+      return reply;
+    }),
   };
+
   return reply;
 };
+
+const responseSchema = { $ref: 'api#/definitions/Autocomplete' };
 
 describe('#getAutocomplete', () => {
   let fixture;
@@ -20,10 +30,7 @@ describe('#getAutocomplete', () => {
 
   let request;
 
-  const emptyResponseBody = JSON.stringify({
-    roads: [],
-    postcodes: [],
-  });
+  const emptyResponseBody = JSON.stringify([]);
 
   beforeEach(() => {
     fixture = getRandomData();
@@ -45,6 +52,7 @@ describe('#getAutocomplete', () => {
       expect(reply.code).toHaveBeenCalledWith(200);
       expect(reply.type).toHaveBeenCalledWith('application/json');
       expect(reply.send).toHaveBeenCalledWith(emptyResponseBody);
+      expect(reply.responseBody).toMatchSchema(responseSchema);
     });
   });
 
@@ -62,7 +70,8 @@ describe('#getAutocomplete', () => {
       getAutocomplete(request, reply);
       expect(reply.code).toHaveBeenCalledWith(200);
       expect(reply.type).toHaveBeenCalledWith('application/json');
-      expect(reply.send).toHaveBeenCalledWith(expect.stringContaining(fixture.sector));
+      expect(reply.send).toHaveBeenCalledWith(expect.stringContaining(fixture.postcode));
+      expect(reply.responseBody).toMatchSchema(responseSchema);
     });
   });
 
@@ -81,6 +90,7 @@ describe('#getAutocomplete', () => {
       expect(reply.code).toHaveBeenCalledWith(200);
       expect(reply.type).toHaveBeenCalledWith('application/json');
       expect(reply.send).toHaveBeenCalledWith(expect.stringContaining(fixture.postcode));
+      expect(reply.responseBody).toMatchSchema(responseSchema);
     });
   });
 
@@ -99,6 +109,7 @@ describe('#getAutocomplete', () => {
       expect(reply.code).toHaveBeenCalledWith(200);
       expect(reply.type).toHaveBeenCalledWith('application/json');
       expect(reply.send).toHaveBeenCalledWith(emptyResponseBody);
+      expect(reply.responseBody).toMatchSchema(responseSchema);
     });
   });
 });
