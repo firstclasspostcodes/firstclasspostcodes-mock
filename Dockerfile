@@ -4,6 +4,7 @@ ARG spec_url=https://api.firstclasspostcodes.com/data/.spec
 
 ENV NODE_ENV=production \
     PORT=80 \
+    ADDRESS=0.0.0.0 \
     SPEC_URL=$spec_url \
     DATA_PATH=/app/src/data/ \
     SPEC_FILE=/app/spec.json

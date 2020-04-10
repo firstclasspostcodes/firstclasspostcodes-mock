@@ -2,7 +2,7 @@ const fastify = require('fastify');
 const cors = require('fastify-cors');
 const glue = require('fastify-openapi-glue');
 
-const { PORT } = process.env;
+const { ADDRESS = '127.0.01', PORT } = process.env;
 
 const openapi = require('./openapi');
 const authorizer = require('./authorizer');
@@ -22,7 +22,7 @@ server.get('/data/.postcodes', getPostcodeTestData);
 
 const start = async () => {
   try {
-    await server.listen(PORT);
+    await server.listen(PORT, ADDRESS);
     server.log.info(`server listening on ${server.server.address().port}`);
   } catch (err) {
     server.log.error(err);
