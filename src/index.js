@@ -6,6 +6,7 @@ const { PORT } = process.env;
 
 const openapi = require('./openapi');
 const authorizer = require('./authorizer');
+const getPostcodeTestData = require('./operations/getPostcodeTestData');
 
 const server = fastify({
   logger: true,
@@ -16,6 +17,8 @@ server.addHook('onRequest', authorizer);
 server.register(cors);
 
 server.register(glue, openapi);
+
+server.get('/data/.postcodes', getPostcodeTestData);
 
 const start = async () => {
   try {
