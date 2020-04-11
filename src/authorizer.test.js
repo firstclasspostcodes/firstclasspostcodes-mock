@@ -15,14 +15,39 @@ describe('#authorizer', () => {
 
   let request;
 
+  const defaultRequest = {
+    headers: {},
+    raw: {
+      url: '/',
+    },
+  };
+
   beforeEach(() => {
     done = jest.fn();
     reply = setupMockReply();
   });
 
+  describe('when the route is not authenticated', () => {
+    beforeEach(() => {
+      request = {
+        ...defaultRequest,
+        raw: {
+          url: '/data/.hidden-path',
+        },
+      };
+    });
+
+    it('calls done and proceeds', () => {
+      authorizer(request, reply, done);
+      expect(done).toHaveBeenCalledTimes(1);
+      expect(reply.code).not.toHaveBeenCalled();
+      expect(reply.send).not.toHaveBeenCalled();
+    });
+  });
+
   describe('when x-api-key is not set', () => {
     beforeEach(() => {
-      request = { headers: {} };
+      request = { ...defaultRequest };
     });
 
     it('returns a 4XX status code', () => {
@@ -37,6 +62,7 @@ describe('#authorizer', () => {
     describe('when the value is invalid', () => {
       beforeEach(() => {
         request = {
+          ...defaultRequest,
           headers: {
             'x-api-key': '234567876543',
           },
@@ -54,6 +80,7 @@ describe('#authorizer', () => {
     describe('when the value is valid', () => {
       beforeEach(() => {
         request = {
+          ...defaultRequest,
           headers: {
             'x-api-key': '111111111111',
           },

@@ -12,9 +12,9 @@ const server = fastify({
   logger: true,
 });
 
-server.addHook('onRequest', authorizer);
+server.register(cors, { origin: true });
 
-server.register(cors);
+server.addHook('onRequest', authorizer);
 
 server.register(glue, openapi);
 
