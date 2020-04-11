@@ -13,7 +13,7 @@ We provide clients in [Ruby](https://github.com/firstclasspostcodes/firstclasspo
 A docker container is provided for ease of use:
 
 ```sh
-docker run -p 80:2345 firstclasspostcodes/mock:v4.0.3.
+docker run -p 80:2345 firstclasspostcodes/mock:v4.0.4.
 ```
 
 Now start calling the Firstclasspostcodes API:
