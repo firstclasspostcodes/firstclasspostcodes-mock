@@ -5,10 +5,6 @@ const prepareJSON = (query, results = []) => {
     return [];
   }
 
-  if (query.length < 4) {
-    return results.map(((r) => r.postcode));
-  }
-
   return results.map(({ postcode, streets }) => [postcode, streets]);
 };
 
