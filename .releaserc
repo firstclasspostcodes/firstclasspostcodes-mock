@@ -10,7 +10,7 @@
           {
             "files": ["README.md"],
             "from": "mock:v[\\.0-9]+",
-            "to": "mock:${nextRelease.gitTag}.",
+            "to": "mock:${nextRelease.gitTag}",
             "results": [
               {
                 "file": "README.md",
