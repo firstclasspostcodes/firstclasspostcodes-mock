@@ -44,7 +44,7 @@
     "eslint-plugin-import": "^2.20.0",
     "git-cz": "^4.2.0",
     "husky": "^4.2.5",
-    "jest": "^25.5.3",
+    "jest": "^25.5.4",
     "jest-json-schema": "^2.1.0",
     "jest-runner-eslint": "^0.7.7",
     "semantic-release": "^15.14.0",
