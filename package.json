@@ -27,7 +27,7 @@
     "ajv": "^6.12.0",
     "dotenv": "^8.2.0",
     "fastify": "^2.13.0",
-    "fastify-cors": "^3.0.3",
+    "fastify-cors": "^4.0.0",
     "fastify-openapi-glue": "^1.5.1",
     "glob": "^7.1.6",
     "js-search": "^2.0.0"
